@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContentPack {
+  id              String   @id @default(cuid())
+  productName     String
+  productCategory String
+  businessType    String
+  targetAudience  String
+  platform        String
+  tone            String
+  brandVoice      String
+  keyBenefits     String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  contents        GeneratedContent[]
+}
+
+model GeneratedContent {
+  id            String      @id @default(cuid())
+  contentPackId String
+  type          String
+  content       String
+  platform      String
+  label         String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  contentPack   ContentPack  @relation(fields: [contentPackId], references: [id], onDelete: Cascade)
+}
