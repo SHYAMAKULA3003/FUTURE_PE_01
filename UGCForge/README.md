@@ -1,4 +1,4 @@
-# 🚀 UGCForge — AI Ad Content Studio
+# 🚀 UGCForge — AI Ad Content Studio 
 
 > Create ad content that feels real, connects emotionally, and converts better — powered by AI.
 
