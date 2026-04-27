@@ -2,7 +2,7 @@
 
 # ✨ SEO Content Studio
 
-### AI-Powered Blog & Content Cluster Generator for Business Websites
+### AI-Powered Blog & Content Cluster Generator for Business Websites 
 
 **Generate ranking-focused pillar blogs, supporting articles, and complete SEO content packs — all powered by AI.**
 
