@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String           @id @default(cuid())
+  name        String
+  businessType String
+  city        String
+  state       String           @default("")
+  description String           @default("")
+  website     String           @default("")
+  targetAudience String        @default("")
+  keywords    String           @default("[]")
+  status      String           @default("draft") // draft, generating, ready, exported
+  generationMsg String         @default("")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  clusters    ContentCluster[]
+}
+
+model ContentCluster {
+  id          String     @id @default(cuid())
+  projectId   String
+  name        String
+  pillarTopic String
+  keywords    String     @default("[]")
+  status      String     @default("outline") // outline, generating, ready
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  blogs       BlogPost[]
+}
+
+model BlogPost {
+  id              String         @id @default(cuid())
+  clusterId       String
+  title           String
+  slug            String         @default("")
+  type            String         @default("supporting") // pillar, supporting
+  targetKeyword   String         @default("")
+  secondaryKeywords String       @default("[]")
+  searchIntent    String         @default("") // informational, navigational, commercial, transactional
+  metaTitle       String         @default("")
+  metaDescription String         @default("")
+  content         String         @default("") // Markdown content
+  wordCount       Int            @default(0)
+  headingStructure String        @default("[]") // H1-H3 structure
+  internalLinks   String         @default("[]") // Suggested internal links
+  seoScore        Int            @default(0)
+  status          String         @default("outline") // outline, generating, ready, published
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  cluster         ContentCluster @relation(fields: [clusterId], references: [id], onDelete: Cascade)
+}
