@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Project Overview
+## 📌 Project Overview 
 
 **UGCForge** is an AI-powered content generation platform designed to help creators, marketers, and businesses generate high-converting UGC-style ad content.
 
